@@ -1,4 +1,3 @@
-import 'package:example/filter_res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_down_menu/flutter_down_menu.dart';
 
@@ -58,69 +57,49 @@ class _MyHomePageState extends State<MyHomePage> {
                 menuController: _menuController,
                 titles: const ["检测领域", "业务类型", "距离"]),
             Expanded(
-                child: DropDownMenu(
+                child: Stack(
+              children: [
+               InkWell(
+                 child:  Center(
+                   child: Text(
+                       "选择：item${_menuController.index}-- ${_menuController.title}"),
+                 ),
+                 onTap: (){
+                   },
+               ),
+                DropDownMenu(
                     height: 300,
+                    milliseconds: 300,
                     children: [
-                      _searchFilter(list1, 0),
-                      _searchFilter(list2, 1),
-                      _searchFilter(list3, 2),
+                      MenuList(
+                        index: 0,
+                        menuController: _menuController,
+                        filterList: list1,
+                        onTap: (index) {
+                          setState(() {});
+                        },
+                      ),
+                      MenuList(
+                        index: 1,
+                        menuController: _menuController,
+                        filterList: list2,
+                        onTap: (index) {
+                          setState(() {});
+                        },
+                      ),
+                      MenuList(
+                        index: 2,
+                        menuController: _menuController,
+                        filterList: list3,
+                        onTap: (index) {
+                          setState(() {});
+                        },
+                      ),
                     ],
-                    menuController: _menuController))
+                    menuController: _menuController),
+              ],
+            ))
           ],
         ));
-  }
-
-  Widget _searchFilter(List<FilterRes> filter, int i) {
-    return Container(
-      margin: const EdgeInsetsDirectional.only(start: 15, end: 15),
-      padding: const EdgeInsetsDirectional.only(bottom: 10),
-      child: GridView.builder(
-        physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //设置列数
-          crossAxisCount: 3,
-          //设置横向间距
-          crossAxisSpacing: 10,
-          //设置主轴间距
-          mainAxisSpacing: 10,
-          // 宽高比
-          childAspectRatio: 3.3,
-        ),
-        itemBuilder: (context, index) {
-          return InkWell(
-            child: Container(
-                decoration: BoxDecoration(
-                    color: filter[index].isSelect == true
-                        ? const Color(0x0DAB4BF4)
-                        : Colors.white,
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
-                    border: Border.all(
-                        color: filter[index].isSelect == true
-                            ? const Color(0xffab4bf4)
-                            : const Color(0xffacacac))),
-                alignment: Alignment.center,
-                child: Text(filter[index].name ?? "",
-                    style: TextStyle(
-                        color: filter[index].isSelect == true
-                            ? const Color(0xffab4bf4)
-                            : const Color(0xffacacac)))),
-            onTap: () {
-              _menuController.changeTitle(i, filter[index].name);
-              print(filter[index].name);
-              setState(() {
-                for (int i = 0; i < filter.length; i++) {
-                  if (i == index) {
-                    filter[i].isSelect = true;
-                  } else {
-                    filter[i].isSelect = false;
-                  }
-                }
-              });
-            },
-          );
-        },
-        itemCount: filter.length,
-      ),
-    );
   }
 }

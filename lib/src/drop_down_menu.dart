@@ -33,7 +33,7 @@ class _DropDownMenuState extends State<DropDownMenu>
   late Animation<double> animation; // 动画抽象类
   late CurvedAnimation cure; // 动画运行的速度轨迹 速度的变化
 
-  bool isShowShadow = false;
+  bool isShowShadow = true; // true 显示下拉菜单 false 隐藏下拉菜单
 
   @override
   void initState() {
@@ -48,8 +48,14 @@ class _DropDownMenuState extends State<DropDownMenu>
         if (status == AnimationStatus.dismissed) {
           // 动画执行完毕
           if (!widget.menuController.isShow) {
-            setState(() {});
+            setState(() {
+              isShowShadow = false;
+            });
           }
+        } else if (status == AnimationStatus.forward) {
+          setState(() {
+            isShowShadow = true;
+          });
         }
       });
 
@@ -60,7 +66,6 @@ class _DropDownMenuState extends State<DropDownMenu>
       } else {
         _controller.reverse();
       }
-      setState(() {});
     });
   }
 
@@ -75,28 +80,28 @@ class _DropDownMenuState extends State<DropDownMenu>
   Widget build(BuildContext context) {
     return Column(
       children: [
-    _MenuBuilder(
-      animation: animation,
-      child: widget.children[widget.menuController.index],
-    ),
-    widget.menuController.isShow
-        ? Expanded(
-            child: InkWell(
-            child: AnimatedBuilder(
-                animation: animation,
-                builder: (context, child) {
-                  return Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height,
-                    color: Colors.black
-                        .withOpacity(animation.value / (widget.height * 3)),
-                  );
-                }),
-            onTap: () {
-              widget.menuController.hide();
-            },
-          ))
-        : Container(),
+        _MenuBuilder(
+          animation: animation,
+          child: widget.children[widget.menuController.index],
+        ),
+        isShowShadow
+            ? Expanded(
+                child: InkWell(
+                child: AnimatedBuilder(
+                    animation: animation,
+                    builder: (context, child) {
+                      return Container(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height,
+                        color: Colors.black
+                            .withOpacity(animation.value / (widget.height * 3)),
+                      );
+                    }),
+                onTap: () {
+                  widget.menuController.hide();
+                },
+              ))
+            : const SizedBox(),
 //          color: widget.maskColor,
       ],
     );
