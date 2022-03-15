@@ -44,8 +44,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/analysis_options.yaml
+/pubspec.lock
+/.metadata
 /android/
 /ios/
-/analysis_options.yaml
-/.metadata
-/pubspec.lock

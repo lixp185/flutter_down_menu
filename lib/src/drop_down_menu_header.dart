@@ -6,12 +6,24 @@ import 'menu_controller.dart';
 class DropDownMenuHeader extends StatefulWidget {
   /// 菜单控制器
   final MenuController menuController;
+
+  /// 头部显示数组
   final List<String> titles;
 
+  /// 头部高度
   final double? headHeight;
 
+  /// 默认文字 icon 色值
   final Color defaultColor;
+
+  /// 点击色值
   final Color clickColor;
+
+  /// icon大小
+  final double? iconSize;
+
+  /// 右边Icon
+  final AssetImage? drawableEndAssetImg;
 
   const DropDownMenuHeader({
     Key? key,
@@ -20,6 +32,8 @@ class DropDownMenuHeader extends StatefulWidget {
     this.headHeight,
     this.defaultColor = const Color(0xFF333333),
     this.clickColor = const Color(0xFFFF00FF),
+    this.drawableEndAssetImg,
+    this.iconSize,
   }) : super(key: key);
 
   @override
@@ -83,15 +97,25 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
                         : widget.defaultColor),
                 children: [
                   WidgetSpan(
-                      child: Icon(
-                    currentIndex == index
-                        ? Icons.arrow_drop_up
-                        : Icons.arrow_drop_down,
-                    color: currentIndex == index || widget.titles[index] != name
-                        ? widget.clickColor
-                        : widget.defaultColor,
-                    size: 20,
-                  ))
+                      child: widget.drawableEndAssetImg == null
+                          ? Icon(
+                              currentIndex == index
+                                  ? Icons.arrow_drop_up
+                                  : Icons.arrow_drop_down,
+                              color: currentIndex == index ||
+                                      widget.titles[index] != name
+                                  ? widget.clickColor
+                                  : widget.defaultColor,
+                              size: widget.iconSize ?? 20,
+                            )
+                          : ImageIcon(
+                              widget.drawableEndAssetImg,
+                              color: currentIndex == index ||
+                                      widget.titles[index] != name
+                                  ? widget.clickColor
+                                  : widget.defaultColor,
+                              size: widget.iconSize ?? 20,
+                            ))
                 ])),
       ),
       onTap: () {

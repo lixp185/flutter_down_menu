@@ -40,8 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     for (int i = 0; i < 10; i++) {
       list1.add(FilterRes(name: "选项$i"));
-      list2.add(FilterRes(name: "选项2$i"));
-      list3.add(FilterRes(name: "选项3$i"));
+      list2.add(FilterRes(name: "选项2--$i"));
+      list3.add(FilterRes(name: "选项3--$i"));
     }
   }
 
@@ -59,20 +59,20 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
                 child: Stack(
               children: [
-               InkWell(
-                 child:  Center(
-                   child: Text(
-                       "选择：item${_menuController.index}-- ${_menuController.title}"),
-                 ),
-                 onTap: (){
-                   },
-               ),
+                InkWell(
+                  child: Center(
+                    child: Text(
+                        "选择：item${_menuController.index}-- ${_menuController.title}"),
+                  ),
+                  onTap: () {},
+                ),
                 DropDownMenu(
                     height: 300,
                     milliseconds: 300,
                     children: [
                       MenuList(
                         index: 0,
+                        choose: Choose.multi,
                         menuController: _menuController,
                         filterList: list1,
                         onTap: (index) {

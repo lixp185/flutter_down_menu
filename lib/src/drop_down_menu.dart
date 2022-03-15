@@ -42,17 +42,20 @@ class _DropDownMenuState extends State<DropDownMenu>
     _controller = AnimationController(
         vsync: this,
         duration: Duration(milliseconds: widget.milliseconds)); //2s
-    cure = CurvedAnimation(parent: _controller, curve: Curves.ease);
+    cure = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+    // 高度变化
     animation = Tween(begin: 0.0, end: widget.height).animate(cure)
+      // 动画执行监听
       ..addStatusListener((status) {
         if (status == AnimationStatus.dismissed) {
-          // 动画执行完毕
+          // 动画反向执行完毕
           if (!widget.menuController.isShow) {
             setState(() {
               isShowShadow = false;
             });
           }
         } else if (status == AnimationStatus.forward) {
+          // 动画正向执行完毕
           setState(() {
             isShowShadow = true;
           });
@@ -66,6 +69,8 @@ class _DropDownMenuState extends State<DropDownMenu>
       } else {
         _controller.reverse();
       }
+      // 刷新筛选数据
+      setState(() {});
     });
   }
 
