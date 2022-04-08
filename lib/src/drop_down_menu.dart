@@ -107,7 +107,6 @@ class _DropDownMenuState extends State<DropDownMenu>
                 },
               ))
             : const SizedBox(),
-//          color: widget.maskColor,
       ],
     );
   }

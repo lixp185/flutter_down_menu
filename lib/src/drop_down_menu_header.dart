@@ -52,6 +52,9 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
   void initState() {
     super.initState();
     changeTitles.addAll(widget.titles);
+    for (var i = 0; i < changeTitles.length; i++) {
+      _children.add(searchFilter(changeTitles[i], i));
+    }
     widget.menuController.addListener(() {
       // 下拉 true 隐藏 false
       var isShow = widget.menuController.isShow;
@@ -59,11 +62,18 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
         if (widget.menuController.title != "") {
           changeTitles[widget.menuController.titleIndex] =
               widget.menuController.title;
+        } else {
+          changeTitles[widget.menuController.titleIndex] =
+              widget.titles[widget.menuController.titleIndex];
         }
         if (isShow && currentIndex < widget.titles.length) {
           currentIndex = widget.menuController.index;
         } else {
           currentIndex = -1;
+        }
+        _children.clear();
+        for (var i = 0; i < changeTitles.length; i++) {
+          _children.add(searchFilter(changeTitles[i], i));
         }
       });
     });
@@ -71,10 +81,6 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
 
   @override
   Widget build(BuildContext context) {
-    _children.clear();
-    for (var i = 0; i < changeTitles.length; i++) {
-      _children.add(searchFilter(changeTitles[i], i));
-    }
     return SizedBox(
       height: widget.headHeight ?? 45,
       child: Row(children: _children),
@@ -123,6 +129,7 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
           widget.menuController.hide();
         } else {
           widget.menuController.show(index);
+          print("index $index");
         }
       },
     ));
