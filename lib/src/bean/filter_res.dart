@@ -3,27 +3,26 @@
 
 /// 通用筛选项
 class FilterRes {
-  int? _code;
+  String? _id;
   String? _name;
   bool isSelect = false; // 是否选择
   bool isOpen = false; // 是否展开
-
   String? _scale;
 
-  int? get code => _code;
+  String? get id => _id;
 
   String? get name => _name;
 
   String? get scale => _scale;
 
-  FilterRes({int? code, String? name, String? scale}) {
-    _code = code;
+  FilterRes({String? id, String? name, String? scale}) {
+    _id = id;
     _name = name;
     _scale = scale;
   }
 
   FilterRes.fromJson(dynamic json) {
-    _code = json['code'];
+    _id = json['id'];
     _name = json['name'];
     _scale = json['scale'] ?? "";
     isSelect = false;
@@ -32,7 +31,7 @@ class FilterRes {
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
-    map['code'] = _code;
+    map['id'] = _id;
     map['name'] = _name;
     map['isSelect'] = isSelect;
     map['isOpen'] = isOpen;

@@ -12,3 +12,7 @@
 
 * update quick implementation list.
 
+## [0.0.4] -2022-03-09
+
+* 更新menuList.
+

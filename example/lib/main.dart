@@ -76,7 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         menuController: _menuController,
                         filterList: list1,
                         onTap: (index) {
-                          setState(() {});
+                          setState(() {
+
+                          });
                         },
                       ),
                       MenuList(
