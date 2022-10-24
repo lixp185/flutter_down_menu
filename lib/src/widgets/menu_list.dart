@@ -12,7 +12,7 @@ enum Choose {
 /// 示例 下拉组件
 class MenuList extends StatefulWidget {
   /// 筛选数据
-  final List<FilterRes> filterList;
+  final List<FilterBean> filterList;
 
   /// 选择回调
   final Function(int index)? onTap;
@@ -29,6 +29,7 @@ class MenuList extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
 
   final int crossAxisCount;
+  final double? mainAxisExtent;
 
   /// 背景色
   final Color bgColor;
@@ -63,6 +64,7 @@ class MenuList extends StatefulWidget {
     this.fontColor = const Color(0xffab4bf4),
     this.unFontColor = const Color(0xffacacac),
     this.fontSize = 12,
+    this.mainAxisExtent = 50,
   }) : super(key: key);
 
   @override
@@ -88,15 +90,15 @@ class _MenuListState extends State<MenuList> {
                 child: GridView.builder(
                   physics: const BouncingScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //设置列数
-                    crossAxisCount: widget.crossAxisCount,
-                    //设置横向间距
-                    crossAxisSpacing: 10,
-                    //设置主轴间距
-                    mainAxisSpacing: 10,
-                    // 宽高比
-                    childAspectRatio: 3.375,
-                  ),
+                      //设置列数
+                      crossAxisCount: widget.crossAxisCount,
+                      //设置横向间距
+                      crossAxisSpacing: 10,
+                      //设置主轴间距
+                      mainAxisSpacing: 10,
+                      // 宽高比
+                      // childAspectRatio: 3.3,
+                      mainAxisExtent: widget.mainAxisExtent),
                   itemBuilder: (context, index) {
                     return widget.choose == Choose.single
                         ? InkWell(
@@ -125,6 +127,12 @@ class _MenuListState extends State<MenuList> {
                                                 ? widget.fontColor
                                                 : widget.unFontColor))),
                             onTap: () {
+                              if(widget.filterList[index].isSelect){
+                                // widget.menuController.changeTitle(
+                                //     widget.index, '');
+
+                                return;
+                              }
                               widget.menuController.changeTitle(
                                   widget.index, widget.filterList[index].name);
                               setState(() {

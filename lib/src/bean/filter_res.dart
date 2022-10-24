@@ -2,7 +2,7 @@
 /// name : "不限"
 
 /// 通用筛选项
-class FilterRes {
+class FilterBean {
   String? _id;
   String? _name;
   bool isSelect = false; // 是否选择
@@ -15,13 +15,13 @@ class FilterRes {
 
   String? get scale => _scale;
 
-  FilterRes({String? id, String? name, String? scale}) {
+  FilterBean({String? id, String? name, String? scale}) {
     _id = id;
     _name = name;
     _scale = scale;
   }
 
-  FilterRes.fromJson(dynamic json) {
+  FilterBean.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _scale = json['scale'] ?? "";

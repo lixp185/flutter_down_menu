@@ -31,17 +31,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final MenuController _menuController = MenuController();
-  final List<FilterRes> list1 = [];
-  final List<FilterRes> list2 = [];
-  final List<FilterRes> list3 = [];
+  final List<FilterBean> list1 = [];
+  final List<FilterBean> list2 = [];
+  final List<FilterBean> list3 = [];
 
   @override
   void initState() {
     super.initState();
     for (int i = 0; i < 10; i++) {
-      list1.add(FilterRes(name: "选项$i"));
-      list2.add(FilterRes(name: "选项2--$i"));
-      list3.add(FilterRes(name: "选项3--$i"));
+      list1.add(FilterBean(name: "选项$i"));
+      list2.add(FilterBean(name: "选项2--$i"));
+      list3.add(FilterBean(name: "选项3--$i"));
     }
   }
 
