@@ -76,15 +76,22 @@ class _MyHomePageState extends State<MyHomePage> {
                         menuController: _menuController,
                         filterList: list1,
                         onTap: (index) {
-                          setState(() {
-
-                          });
+                          setState(() {});
                         },
                       ),
                       MenuList(
                         index: 1,
                         menuController: _menuController,
                         filterList: list2,
+                        crossAxisCount: 3,
+                        padding: const EdgeInsetsDirectional.all(15),
+                        outLineColor: Colors.transparent,
+                        bgColor: Colors.transparent,
+                        unBgColor: Colors.transparent,
+                        unOutLineColor: Colors.transparent,
+                        mainAxisExtent: 20,
+                        color: Colors.grey,
+                        itemAlignment: Alignment.centerLeft,
                         onTap: (index) {
                           setState(() {});
                         },

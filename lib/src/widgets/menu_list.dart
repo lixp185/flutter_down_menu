@@ -31,7 +31,7 @@ class MenuList extends StatefulWidget {
   final int crossAxisCount;
   final double? mainAxisExtent;
 
-  /// 背景色
+  /// item背景色
   final Color bgColor;
   final Color unBgColor;
 
@@ -45,6 +45,19 @@ class MenuList extends StatefulWidget {
 
   final double fontSize;
   final double radius;
+
+  /// item对齐方式
+  final AlignmentGeometry? itemAlignment;
+
+  /// 竖向间距
+  final double mainAxisSpacing;
+
+  /// 横向间距
+  final double crossAxisSpacing;
+
+  /// 下拉布局装饰
+  final Decoration? decoration;
+  final Color? color;
 
   const MenuList({
     Key? key,
@@ -65,6 +78,11 @@ class MenuList extends StatefulWidget {
     this.unFontColor = const Color(0xffacacac),
     this.fontSize = 12,
     this.mainAxisExtent = 50,
+    this.itemAlignment,
+    this.mainAxisSpacing = 10,
+    this.crossAxisSpacing = 10,
+    this.decoration,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -77,8 +95,8 @@ class _MenuListState extends State<MenuList> {
     return MediaQuery.removePadding(
       context: context,
       child: Container(
-          margin: widget.margin ??
-              const EdgeInsetsDirectional.only(start: 15, end: 15),
+          decoration: widget.decoration ?? BoxDecoration(color: widget.color),
+          margin: widget.margin,
           padding: widget.padding ??
               const EdgeInsetsDirectional.only(bottom: 5, top: 10),
           child: Stack(
@@ -93,9 +111,9 @@ class _MenuListState extends State<MenuList> {
                       //设置列数
                       crossAxisCount: widget.crossAxisCount,
                       //设置横向间距
-                      crossAxisSpacing: 10,
+                      crossAxisSpacing: widget.crossAxisSpacing,
                       //设置主轴间距
-                      mainAxisSpacing: 10,
+                      mainAxisSpacing: widget.mainAxisSpacing,
                       // 宽高比
                       // childAspectRatio: 3.3,
                       mainAxisExtent: widget.mainAxisExtent),
@@ -106,9 +124,10 @@ class _MenuListState extends State<MenuList> {
                                 padding: const EdgeInsetsDirectional.only(
                                     start: 4, end: 4),
                                 decoration: BoxDecoration(
-                                    color: widget.filterList[index].isSelect == true
-                                        ? widget.bgColor
-                                        : widget.unBgColor,
+                                    color:
+                                        widget.filterList[index].isSelect == true
+                                            ? widget.bgColor
+                                            : widget.unBgColor,
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(widget.radius)),
                                     border: Border.all(
@@ -116,18 +135,16 @@ class _MenuListState extends State<MenuList> {
                                             widget.filterList[index].isSelect == true
                                                 ? widget.outLineColor
                                                 : widget.unOutLineColor)),
-                                alignment: Alignment.center,
+                                alignment:
+                                    widget.itemAlignment ?? Alignment.center,
                                 child: Text(widget.filterList[index].name ?? "",
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: widget.fontSize,
-                                        color:
-                                            widget.filterList[index].isSelect == true
-                                                ? widget.fontColor
-                                                : widget.unFontColor))),
+                                        color: widget.filterList[index].isSelect == true ? widget.fontColor : widget.unFontColor))),
                             onTap: () {
-                              if(widget.filterList[index].isSelect){
+                              if (widget.filterList[index].isSelect) {
                                 // widget.menuController.changeTitle(
                                 //     widget.index, '');
 
