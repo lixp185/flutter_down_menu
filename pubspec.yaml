@@ -2,7 +2,7 @@ name: flutter_down_menu
 description: Customize the drop-down menu, quickly realize the head drop-down menu,
   and support the rapid realization of single selection, multiple selection list, secondary list, single selection, multiple selection and other functions.
 
-version: 0.0.6
+version: 0.0.7
 homepage: https://github.com/lixp185/flutter_down_menu
 
 environment:

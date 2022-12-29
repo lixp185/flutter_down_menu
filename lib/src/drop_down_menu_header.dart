@@ -25,6 +25,9 @@ class DropDownMenuHeader extends StatefulWidget {
   /// 右边Icon
   final AssetImage? drawableEndAssetImg;
 
+  /// 是否平均分配筛选项
+  final bool isAverage;
+
   const DropDownMenuHeader({
     Key? key,
     required this.menuController,
@@ -34,6 +37,7 @@ class DropDownMenuHeader extends StatefulWidget {
     this.clickColor = const Color(0xFFFF00FF),
     this.drawableEndAssetImg,
     this.iconSize,
+    this.isAverage = false,
   }) : super(key: key);
 
   @override
@@ -83,13 +87,21 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: widget.headHeight ?? 45,
-      child: Row(mainAxisSize: MainAxisSize.max,mainAxisAlignment:
-      MainAxisAlignment.start,
+      child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: _children),
     );
   }
 
   Widget searchFilter(String name, int index) {
+    if (widget.isAverage) {
+      return Expanded(child: _filter(name, index));
+    }
+    return _filter(name, index);
+  }
+
+  Widget _filter(String name, int index) {
     return InkWell(
       child: Container(
         margin: const EdgeInsetsDirectional.only(start: 10),
@@ -107,23 +119,23 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
                   WidgetSpan(
                       child: widget.drawableEndAssetImg == null
                           ? Icon(
-                        currentIndex == index
-                            ? Icons.arrow_drop_up
-                            : Icons.arrow_drop_down,
-                        color: currentIndex == index ||
-                            widget.titles[index] != name
-                            ? widget.clickColor
-                            : widget.defaultColor,
-                        size: widget.iconSize ?? 20,
-                      )
+                              currentIndex == index
+                                  ? Icons.arrow_drop_up
+                                  : Icons.arrow_drop_down,
+                              color: currentIndex == index ||
+                                      widget.titles[index] != name
+                                  ? widget.clickColor
+                                  : widget.defaultColor,
+                              size: widget.iconSize ?? 20,
+                            )
                           : ImageIcon(
-                        widget.drawableEndAssetImg,
-                        color: currentIndex == index ||
-                            widget.titles[index] != name
-                            ? widget.clickColor
-                            : widget.defaultColor,
-                        size: widget.iconSize ?? 20,
-                      ))
+                              widget.drawableEndAssetImg,
+                              color: currentIndex == index ||
+                                      widget.titles[index] != name
+                                  ? widget.clickColor
+                                  : widget.defaultColor,
+                              size: widget.iconSize ?? 20,
+                            ))
                 ])),
       ),
       onTap: () {
@@ -131,7 +143,6 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
           widget.menuController.hide();
         } else {
           widget.menuController.show(index);
-          print("index $index");
         }
       },
     );

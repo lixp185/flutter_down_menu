@@ -38,6 +38,7 @@ class MenuList extends StatefulWidget {
   /// 边框色
   final Color outLineColor;
   final Color unOutLineColor;
+  final BoxBorder? border;
 
   /// 文字色
   final Color fontColor;
@@ -83,6 +84,7 @@ class MenuList extends StatefulWidget {
     this.crossAxisSpacing = 10,
     this.decoration,
     this.color,
+    this.border,
   }) : super(key: key);
 
   @override
@@ -124,15 +126,16 @@ class _MenuListState extends State<MenuList> {
                                 padding: const EdgeInsetsDirectional.only(
                                     start: 4, end: 4),
                                 decoration: BoxDecoration(
-                                    color:
-                                        widget.filterList[index].isSelect == true
-                                            ? widget.bgColor
-                                            : widget.unBgColor,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(widget.radius)),
-                                    border: Border.all(
-                                        color:
-                                            widget.filterList[index].isSelect == true
+                                    color: widget.filterList[index].isSelect == true
+                                        ? widget.bgColor
+                                        : widget.unBgColor,
+                                    borderRadius: widget.border != null
+                                        ? null
+                                        : BorderRadius.all(
+                                            Radius.circular(widget.radius)),
+                                    border: widget.border ??
+                                        Border.all(
+                                            color: widget.filterList[index].isSelect == true
                                                 ? widget.outLineColor
                                                 : widget.unOutLineColor)),
                                 alignment:

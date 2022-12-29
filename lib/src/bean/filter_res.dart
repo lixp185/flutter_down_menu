@@ -15,7 +15,7 @@ class FilterBean {
 
   String? get scale => _scale;
 
-  FilterBean({String? id, String? name, String? scale}) {
+  FilterBean({String? id, String? name, String? scale,this.isSelect = false}) {
     _id = id;
     _name = name;
     _scale = scale;
