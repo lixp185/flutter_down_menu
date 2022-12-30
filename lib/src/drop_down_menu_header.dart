@@ -28,6 +28,9 @@ class DropDownMenuHeader extends StatefulWidget {
   /// 是否平均分配筛选项
   final bool isAverage;
 
+  /// 点击回调
+  final Function(int index)? onTab;
+
   const DropDownMenuHeader({
     Key? key,
     required this.menuController,
@@ -38,6 +41,7 @@ class DropDownMenuHeader extends StatefulWidget {
     this.drawableEndAssetImg,
     this.iconSize,
     this.isAverage = false,
+    this.onTab,
   }) : super(key: key);
 
   @override
@@ -139,6 +143,7 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
                 ])),
       ),
       onTap: () {
+
         if (index == currentIndex && widget.menuController.isShow) {
           widget.menuController.hide();
         } else {

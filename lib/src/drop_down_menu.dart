@@ -9,6 +9,7 @@ class DropDownMenu extends StatefulWidget {
 
   /// 下拉组件高度
   final double height;
+  final List<double>? heights;
 
   /// 下拉时间
   final int milliseconds;
@@ -19,7 +20,7 @@ class DropDownMenu extends StatefulWidget {
       required this.children,
       this.height = 200,
       this.milliseconds = 100,
-      required this.menuController})
+      required this.menuController, this.heights})
       : super(key: key);
 
   @override
@@ -43,28 +44,39 @@ class _DropDownMenuState extends State<DropDownMenu>
         vsync: this,
         duration: Duration(milliseconds: widget.milliseconds)); //2s
     cure = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
+
     // 高度变化
-    animation = Tween(begin: 0.0, end: widget.height).animate(cure)
-      // 动画执行监听
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.dismissed) {
-          // 动画反向执行完毕
-          if (!widget.menuController.isShow) {
-            setState(() {
-              isShowShadow = false;
-            });
-          }
-        } else if (status == AnimationStatus.forward) {
-          // 动画正向执行完毕
+    animation = Tween(begin: 0.0, end: widget.height).animate(cure);
+    // 动画执行监听
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.dismissed) {
+        // 动画反向执行完毕
+        if (!widget.menuController.isShow) {
           setState(() {
-            isShowShadow = true;
+            isShowShadow = false;
           });
         }
-      });
+      } else if (status == AnimationStatus.forward) {
+        // 动画正向执行完毕
+        setState(() {
+          isShowShadow = true;
+        });
+      }
+    });
 
     widget.menuController.addListener(() {
       if (widget.menuController.isShow) {
         // 显示
+        print('xxxx ${widget.menuController.index}');
+        double h;
+        if(widget.heights!=null){
+          /// 下拉菜单高度每个菜单自定义
+           h = widget.heights![widget.menuController.index];
+        }else{
+          h = widget.height;
+        }
+        // 高度变化
+        animation = Tween(begin: 0.0, end: h).animate(cure);
         _controller.forward();
       } else {
         _controller.reverse();
@@ -82,7 +94,13 @@ class _DropDownMenuState extends State<DropDownMenu>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+  }
+  @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         _MenuBuilder(
