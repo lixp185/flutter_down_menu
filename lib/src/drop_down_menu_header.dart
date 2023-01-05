@@ -31,6 +31,9 @@ class DropDownMenuHeader extends StatefulWidget {
   /// 点击回调
   final Function(int index)? onTab;
 
+  /// 不受限制文本
+  final String unlimitedText;
+
   const DropDownMenuHeader({
     Key? key,
     required this.menuController,
@@ -42,6 +45,7 @@ class DropDownMenuHeader extends StatefulWidget {
     this.iconSize,
     this.isAverage = false,
     this.onTab,
+    this.unlimitedText = '不限',
   }) : super(key: key);
 
   @override
@@ -67,7 +71,8 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
       // 下拉 true 隐藏 false
       var isShow = widget.menuController.isShow;
       setState(() {
-        if (widget.menuController.title != "") {
+        if (widget.menuController.title != "" &&
+            widget.menuController.title != widget.unlimitedText) {
           changeTitles[widget.menuController.titleIndex] =
               widget.menuController.title;
         } else {
@@ -143,7 +148,6 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
                 ])),
       ),
       onTap: () {
-
         if (index == currentIndex && widget.menuController.isShow) {
           widget.menuController.hide();
         } else {

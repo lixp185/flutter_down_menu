@@ -100,7 +100,7 @@ class _MenuListState extends State<MenuList> {
           decoration: widget.decoration ?? BoxDecoration(color: widget.color),
           margin: widget.margin,
           padding: widget.padding ??
-              const EdgeInsetsDirectional.only(bottom: 5, top: 10),
+              const EdgeInsetsDirectional.only(start: 15,end:15,bottom: 5, top: 10),
           child: Stack(
             children: [
               Container(
