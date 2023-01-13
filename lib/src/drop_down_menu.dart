@@ -20,7 +20,8 @@ class DropDownMenu extends StatefulWidget {
       required this.children,
       this.height = 200,
       this.milliseconds = 100,
-      required this.menuController, this.heights})
+      required this.menuController,
+      this.heights})
       : super(key: key);
 
   @override
@@ -69,10 +70,10 @@ class _DropDownMenuState extends State<DropDownMenu>
         // 显示
         print('xxxx ${widget.menuController.index}');
         double h;
-        if(widget.heights!=null){
+        if (widget.heights != null) {
           /// 下拉菜单高度每个菜单自定义
-           h = widget.heights![widget.menuController.index];
-        }else{
+          h = widget.heights![widget.menuController.index];
+        } else {
           h = widget.height;
         }
         // 高度变化
@@ -96,11 +97,10 @@ class _DropDownMenuState extends State<DropDownMenu>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         _MenuBuilder(

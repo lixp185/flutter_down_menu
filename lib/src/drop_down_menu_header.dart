@@ -63,6 +63,8 @@ class _DropDownMenuHeaderState extends State<DropDownMenuHeader> {
   @override
   void initState() {
     super.initState();
+// Builder()
+
     changeTitles.addAll(widget.titles);
     for (var i = 0; i < changeTitles.length; i++) {
       _children.add(searchFilter(changeTitles[i], i));

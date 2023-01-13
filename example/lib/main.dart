@@ -55,19 +55,26 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             DropDownMenuHeader(
                 menuController: _menuController,
+                isAverage: true,
                 titles: const ["检测领域", "业务类型", "距离"]),
             Expanded(
-                child: Stack(
+                child: Stack  (
               children: [
                 InkWell(
                   child: Center(
                     child: Text(
                         "选择：item${_menuController.index}-- ${_menuController.title}"),
-                  ),
+                    ),
                   onTap: () {},
                 ),
                 DropDownMenu(
-                    height: 300,
+
+                    heights: [
+                      300,
+                      200,
+                      300
+                    ],
+
                     milliseconds: 300,
                     children: [
                       MenuList(
@@ -90,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         unBgColor: Colors.transparent,
                         unOutLineColor: Colors.transparent,
                         mainAxisExtent: 20,
-                        color: Colors.grey,
+                        color: Colors.white,
                         itemAlignment: Alignment.centerLeft,
                         onTap: (index) {
                           setState(() {});
