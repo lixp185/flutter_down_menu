@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'menu_controller.dart';
+import 'menu_controller.dart' as m;
 
 /// 下拉选择  所有的头维护一个下拉组件 组件内部child更新
 class DropDownMenu extends StatefulWidget {
@@ -13,7 +13,7 @@ class DropDownMenu extends StatefulWidget {
 
   /// 下拉时间
   final int milliseconds;
-  final MenuController menuController;
+  final m.MenuController menuController;
 
   const DropDownMenu(
       {Key? key,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'menu_controller.dart';
+import 'menu_controller.dart' as m;
 
 /// 下拉组件头部 配合DropDownMenu 使用
 class DropDownMenuHeader extends StatefulWidget {
   /// 菜单控制器
-  final MenuController menuController;
+  final m.MenuController menuController;
 
   /// 头部显示数组
   final List<String> titles;

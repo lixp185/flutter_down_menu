@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_down_menu/flutter_down_menu.dart' as m;
 import 'package:flutter_down_menu/flutter_down_menu.dart';
 
 ///支持 单选、多选列表
@@ -18,7 +19,7 @@ class MenuList extends StatefulWidget {
   final Function(int index)? onTap;
 
   /// 选择控制器
-  final MenuController menuController;
+  final m.MenuController menuController;
 
   /// 下拉菜单index
   final int index;

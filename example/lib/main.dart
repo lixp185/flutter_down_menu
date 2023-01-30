@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_down_menu/flutter_down_menu.dart' as m;
 import 'package:flutter_down_menu/flutter_down_menu.dart';
 
 void main() {
@@ -30,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final MenuController _menuController = MenuController();
+  final m.MenuController _menuController = m.MenuController();
   final List<FilterBean> list1 = [];
   final List<FilterBean> list2 = [];
   final List<FilterBean> list3 = [];
